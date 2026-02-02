@@ -8,14 +8,18 @@
 <?php // Script 2.3 - Variables.php
 
 // An address: 
+$fname = "Kyle";
+$lname = "McAfee";
 $street = "422 North Basalt Road";
 $city = "Prescott";
 $state = "AZ";
 $zip = 89030;
 
 // Print the address: 
-print "<p>The address is <br>$street<br>$city $state $zip</p>";
+print "<p>My name is $fname $lname<br>The address is <br>$street<br>$city $state $zip</p>";
+
 
 ?>
 </body>
+
 </html>	
