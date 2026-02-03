@@ -11,6 +11,8 @@ This page receives the data from feedback.html.
 It will recieve: title, name, email, response, comments, and submit in $_POST.
 */
 
+int_set('display_errors', 1); // Let me learn from my mistakes. 
+
 // Create shorthand versions of the variables:
 $title = $_POST['title'];
 $fname = $_POST['firstname'];
@@ -27,4 +29,5 @@ added<br>'$comments'</p>";
 
 ?>
 </body>
+
 </html>
