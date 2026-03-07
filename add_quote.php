@@ -7,9 +7,9 @@
 <body>
 
 <?php
-// Script 11.1 - add_quote.php
-// This script displays and handles an HTML form.
-// It takes text input and stores it in a text file.
+// Script 11.2 - add_quote.php
+/* This script displays and handles an HTML form.
+   It takes text input and stores it in a text file. */
 
 // Identify the file to use:
 $file = '../quotes.txt';
@@ -17,26 +17,33 @@ $file = '../quotes.txt';
 // Check for a form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Validate the input:
+    // Check if something was entered:
     if (!empty($_POST['quote']) && ($_POST['quote'] != 'Enter your quotation here.')) {
 
-        // Check if the file is writable:
+        // Confirm that the file is writable:
         if (is_writable($file)) {
 
-            // Write the data:
-            file_put_contents($file, $_POST['quote'] . PHP_EOL, FILE_APPEND);
+            // Write the data with exclusive lock:
+            file_put_contents(
+                $file,
+                $_POST['quote'] . PHP_EOL,
+                FILE_APPEND | LOCK_EX
+            );
 
-            // Confirmation message:
+            // Print a success message:
             print '<p>Your quotation has been stored.</p>';
 
         } else {
+            // File not writable:
             print '<p style="color:red;">Your quotation could not be stored due to a system error.</p>';
         }
 
     } else {
+        // Nothing entered:
         print '<p style="color:red;">Please enter a quotation!</p>';
     }
-}
+
+} // End of form submission check.
 ?>
 
 <form action="add_quote.php" method="post">
