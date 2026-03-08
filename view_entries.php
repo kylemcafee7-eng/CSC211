@@ -47,6 +47,8 @@ $result = $conn->query($sql);
         <th>ID</th>
         <th>Content</th>
         <th>Created At</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
 
     <?php
@@ -58,12 +60,28 @@ $result = $conn->query($sql);
             echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
             echo "<td>" . nl2br(htmlspecialchars($row["content"])) . "</td>";
             echo "<td>" . htmlspecialchars($row["created_at"]) . "</td>";
+
+            // UPDATE BUTTON
+            echo "<td>";
+            echo "<form action='edit_entry.php' method='get'>";
+            echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+            echo "<button type='submit'>Update</button>";
+            echo "</form>";
+            echo "</td>";
+
+            // DELETE LINK
+            echo "<td>";
+            echo "<a href='delete_entry.php?id=" . $row['id'] . "' ";
+            echo "onclick=\"return confirm('Delete this entry?');\">";
+            echo "Delete</a>";
+            echo "</td>";
+
             echo "</tr>";
         }
 
     } else {
         // Empty table case
-        echo "<tr><td colspan='3'>No blog entries found</td></tr>";
+        echo "<tr><td colspan='5'>No blog entries found</td></tr>";
     }
 
     // Close connection
