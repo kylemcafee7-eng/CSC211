@@ -11,14 +11,15 @@
 // This script connects to the MySQL database.
 
 // Attempt to connect to MySQL and print out messages:
-$dbc = @mysqli_connect('localhost', 'root', 'password', 'myblog');
+$conn = @mysqli_connect('localhost', 'root', '', 'myblog');
 
-if ($dbc) {
+if ($conn) {
     print '<p>Successfully connected to the database!</p>';
-    mysqli_close($dbc); // Close the connection.
 } else {
-    print '<p style="color: red;">Could not connect to the database:<br>' 
+    print '<p style="color: red;">Could not connect to the database:<br>'
         . mysqli_connect_error() . '.</p>';
+    // Stop the script so create_table.php doesn't run with a null connection
+    exit();
 }
 ?>
 
